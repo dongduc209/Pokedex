@@ -1,3 +1,15 @@
+.list-group {
+  margin-top: 50px;
+  margin-left: 30px;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 3fr));
+  gap: 15px;
+  justify-content: center;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -24,15 +36,16 @@ body {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 20px;
     margin: 4px 2px;
-    width: 150px;
-    -webkit-animation-duration: 0.4s;
+    width: 200px;
+    height: 70px;
     transition-duration: 0.2s;
     cursor: pointer;
-    background-color: black;
-    color: white;
-    border: 2px solid #bd8282;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    border: 15px solid;
+    border-color: red white white;
 }
 
 .pokemon-image {
