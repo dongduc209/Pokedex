@@ -18,11 +18,13 @@ let pokemonRepository = (function () {
     }
 
     function addListItem(pokemon) {
-      let pokemonList = document.querySelector(".pokemon-list");
+      let pokemonList = document.querySelector(".list-group");
       let listpokemon = document.createElement("li");
       let button = document.createElement("button");
       button.innerText = pokemon.name;
-      button.classList.add("button-class");
+      button.classList.add("button-class", "btn", "btn-warning");
+      button.setAttribute('data-toggle', 'modal');
+      button.setAttribute('data-target', '#modal-container');
       listpokemon.appendChild(button);
       pokemonList.appendChild(listpokemon);
 
@@ -66,59 +68,51 @@ let pokemonRepository = (function () {
       });
     }
 
-    function showModal(pokemon) {
-      let modalContainer = document.querySelector('#modal-container');
-      modalContainer.innerHTML = '';
-    
-      let modal = document.createElement('div');
-      modal.classList.add('modal');
-    
-      let closeButtonElement = document.createElement('button');
-      closeButtonElement.classList.add('modal-close');
-      closeButtonElement.innerText = 'Close';
-      closeButtonElement.addEventListener('click', hideModal);
-
-      window.addEventListener('keydown', (e) => {
-        let modalContainer = document.querySelector('#modal-container');
-        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-          hideModal();  
-        }
-      });
-
+    function showModal(item) {
+      const modalContainer = document.querySelector('#modal-container');
+      const modalBody = document.querySelector('#modal-container .modal-body');
+      const modalTitle = document.querySelector('#modal-container .modal-title');
+      
+      modalContainer.classList.add('is-visible');
+      
+      $('#modal-container').modal('show')
+      // Clear all existing modal content
+      // modalContainer.innerHTML = '';
+      modalBody.innerHTML = '';
       modalContainer.addEventListener('click', (e) => {
+        // Since this is also triggered when clicking INSIDE the modal
+        // We only want to close if the user clicks directly on the overlay
         let target = e.target;
         if (target === modalContainer) {
           hideModal();
         }
       });
-    
-      let titleElement = document.createElement('h1');
-      titleElement.innerText = pokemon.name;
+  
+      let modal = document.createElement('div');
+      let container = document.querySelector('#image-container');
 
-      let heightElement = document.createElement('h5');
-      heightElement.innerText = "Height: " + pokemon.height;
+      modalTitle.innerText = item.name + (':    ') + ('height =  ') + item.height;
 
-      let imageElement = document.createElement('img');
-      imageElement.src = pokemon.imageUrl;
-      imageElement.classList.add("pokemon-image");
+      let myImage = document.createElement('img');
+      myImage.src = item.imageUrl;
+      myImage.classList.add("pokemon-image");
+      
+      modal.appendChild(myImage);
+      modalBody.appendChild(modal);
 
-      modal.appendChild(closeButtonElement);
-      modal.appendChild(titleElement);
-      modal.appendChild(heightElement);
-      modal.appendChild(imageElement);
-      modalContainer.appendChild(modal);
-    
-      modalContainer.classList.add('is-visible');
     }
-    
-    document.querySelector('#show-modal').addEventListener('click', () => {
-      showModal();
-    });
-    
+  
     function hideModal() {
       let modalContainer = document.querySelector('#modal-container');
       modalContainer.classList.remove('is-visible');
     }
+  
+    window.addEventListener('keydown', (e) => {
+      let modalContainer = document.querySelector('#modal-container');
+      if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+        hideModal();
+      }
+    });
     
   
     return {
@@ -137,5 +131,4 @@ let pokemonRepository = (function () {
       pokemonRepository.addListItem(pokemon);
     });
   });
-
 
