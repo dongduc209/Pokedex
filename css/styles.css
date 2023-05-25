@@ -42,10 +42,10 @@ body {
     height: 70px;
     transition-duration: 0.2s;
     cursor: pointer;
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-    border: 15px solid;
-    border-color: red white white;
+    background-color: rgb(43, 42, 42);
+    color: rgb(255, 255, 255);
+    border: 3px solid rgb(221, 71, 71);
+    border-radius: 20px;
 }
 
 .pokemon-image {
