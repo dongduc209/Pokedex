@@ -42,7 +42,7 @@ body {
     height: 70px;
     transition-duration: 0.2s;
     cursor: pointer;
-    background-color: rgb(43, 42, 42);
+    background-color: rgb(36, 35, 35);
     color: rgb(255, 255, 255);
     border: 3px solid rgb(221, 71, 71);
     border-radius: 20px;
@@ -50,7 +50,7 @@ body {
 
 .pokemon-image {
   display: inline-block;
-  height: 150px;
-  width: 150px;
+  height: 200px;
+  width: 200px;
 }
 
